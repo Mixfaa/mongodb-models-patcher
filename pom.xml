@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mixfa</groupId>
+    <artifactId>mongodb-pather-plugin</artifactId>
+    <properties>
+        <maven.compiler.source>23</maven.compiler.source> <!-- Or your target JDK version -->
+        <maven.compiler.target>23</maven.compiler.target> <!-- Or your target JDK version -->
+        <javaparser.version>3.27.0</javaparser.version> <!-- Use the latest stable version -->
+        <auto-service.version>1.1.1</auto-service.version> <!-- Use the latest stable version -->
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version> <!-- Use a recent version -->
+                <configuration>
+                    <source>23</source>
+                    <target>23</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.38</version>
+                        </path>
+                        <path>
+                            <groupId>com.google.auto.service</groupId>
+                            <artifactId>auto-service</artifactId>
+                            <version>${auto-service.version}</version>
+                        </path>
+                        <!-- If your processor has its own dependencies, list them here too -->
+                        <path>
+                            <groupId>com.github.javaparser</groupId>
+                            <artifactId>javaparser-core</artifactId>
+                            <version>${javaparser.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <version>1.0-SNAPSHOT</version>
+    <name>Maven Mojo Archetype</name>
+    <url>http://maven.apache.org</url>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.squareup/javapoet -->
+        <dependency>
+            <groupId>com.squareup</groupId>
+            <artifactId>javapoet</artifactId>
+            <version>1.13.0</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.javaparser</groupId>-->
+<!--            <artifactId>javaparser-core</artifactId>-->
+<!--            <version>${javaparser.version}</version>-->
+<!--        </dependency>-->
+
+        <!-- Google AutoService for automatic processor registration -->
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service</artifactId>
+            <version>${auto-service.version}</version>
+            <scope>provided</scope> <!-- Only needed at compile time -->
+        </dependency>
+        <!-- Also need auto-service-annotations for the @AutoService annotation -->
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service-annotations</artifactId>
+            <version>${auto-service.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>5.0.0-M4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.38</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>
