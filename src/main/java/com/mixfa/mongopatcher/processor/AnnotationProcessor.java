@@ -107,8 +107,8 @@ public class AnnotationProcessor extends AbstractProcessor {
         for (var method : methods) {
             if (method.isAnnotationPresent(IgnoreMethod.class)) continue;
 
-            methodSpecs.add(makePatchMethod(context, method, FORWARDING_CHAIN, MethodNamingPolicy.DefaultNamingPolicy.instance()));
-            methodSpecs.add(makePatchMethod(context, method, SKIPPING_CHAIN, MethodNamingPolicy.PostfixNamingPolicy.exPostfix()));
+            methodSpecs.add(makePatchMethod(context, method, FORWARDING_CHAIN, MethodNamingPolicy.PostfixNamingPolicy.exPostfix()));
+            methodSpecs.add(makePatchMethod(context, method, SKIPPING_CHAIN, MethodNamingPolicy.DefaultNamingPolicy.instance()));
         }
     }
 
