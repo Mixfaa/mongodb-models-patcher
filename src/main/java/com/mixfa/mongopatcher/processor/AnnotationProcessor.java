@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 
-@SupportedAnnotationTypes("com.mixfa.mongopatcher.Patcher.Patchable")
+@SupportedAnnotationTypes("com.mixfa.mongopatcher.MongoPatcher.Patchable")
 @SupportedSourceVersion(SourceVersion.RELEASE_23)
 @AutoService(Processor.class)
 public class AnnotationProcessor extends AbstractProcessor {
