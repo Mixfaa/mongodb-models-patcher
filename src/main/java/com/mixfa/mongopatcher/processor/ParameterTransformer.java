@@ -47,6 +47,7 @@ interface ParameterTransformer {
 
     class FieldParameterTransformer implements ParameterTransformer {
         private final static FieldParameterTransformer INSTANCE = new FieldParameterTransformer();
+
         public static FieldParameterTransformer instance() {
             return INSTANCE;
         }
@@ -58,7 +59,13 @@ interface ParameterTransformer {
         public ParameterTransformingResult transform(MethodGenerationContext context, Parameter parameter, MethodSpec.Builder methodSpecBuilder) {
             if (!parameter.isAnnotationPresent(FieldNameParam.class))
                 return ParameterTransformingResult.callNext();
-            return ParameterTransformingResult.transformed('"' + context.compName() + '"');
+
+
+            var name = context.settings().findFirstByType(PatchClassMakingSetting.InnerFieldTweak.class)
+                    .stream().map(tweak -> tweak.change(context.compName()))
+                    .findFirst().orElse(context.compName());
+
+            return ParameterTransformingResult.transformed('"' + name + '"');
         }
     }
 
