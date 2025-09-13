@@ -13,8 +13,6 @@ import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.*;
 import javax.lang.model.type.DeclaredType;
-import javax.lang.model.util.Elements;
-import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -31,16 +29,12 @@ import java.util.Set;
 public class AnnotationProcessor extends AbstractProcessor {
     private Messager messager;
     private Filer filer;
-    private Elements elements;
-    private Types types;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
         this.messager = processingEnv.getMessager();
         this.filer = processingEnv.getFiler();
-        this.types = processingEnv.getTypeUtils();
-        this.elements = processingEnv.getElementUtils();
     }
 
     @Override
@@ -154,16 +148,6 @@ public class AnnotationProcessor extends AbstractProcessor {
         var superVisitor = new ElementVisitor<Void, Object>() {
 
             @Override
-            public Void visit(Element e, Object o) {
-                return null;
-            }
-
-            @Override
-            public Void visitPackage(PackageElement e, Object o) {
-                return null;
-            }
-
-            @Override
             public Void visitType(TypeElement typeElement, Object o) {
                 for (RecordComponentElement component : typeElement.getRecordComponents()) {
                     if (component.getAnnotation(MongoPatcher.IgnoreField.class) != null) continue;
@@ -271,6 +255,16 @@ public class AnnotationProcessor extends AbstractProcessor {
 
                 }
 
+                return null;
+            }
+
+            @Override
+            public Void visit(Element e, Object o) {
+                return null;
+            }
+
+            @Override
+            public Void visitPackage(PackageElement e, Object o) {
                 return null;
             }
 

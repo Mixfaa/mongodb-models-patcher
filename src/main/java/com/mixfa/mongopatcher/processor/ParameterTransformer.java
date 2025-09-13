@@ -60,7 +60,6 @@ interface ParameterTransformer {
             if (!parameter.isAnnotationPresent(FieldNameParam.class))
                 return ParameterTransformingResult.callNext();
 
-
             var name = context.settings().findFirstByType(PatchClassMakingSetting.InnerFieldTweak.class)
                     .stream().map(tweak -> tweak.change(context.compName()))
                     .findFirst().orElse(context.compName());

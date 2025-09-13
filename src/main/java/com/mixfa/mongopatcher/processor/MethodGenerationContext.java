@@ -14,7 +14,6 @@ public record MethodGenerationContext(
         TypeName parameterizedPatchTypeName,
         PatchClassMakingSettings settings
 ) {
-
     public MethodGenerationContext(
             String compName,
             TypeName compType,

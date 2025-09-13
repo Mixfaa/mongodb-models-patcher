@@ -11,7 +11,6 @@ public record ParameterTransformerChain(List<ParameterTransformer> parameterProc
         for (var processor : parameterProcessors) {
             var result = processor.transform(context, parameter, methodSpecBuilder);
 
-
             if (result instanceof ParameterTransformingResult.Transformed(String transformedTo))
                 return Optional.ofNullable(transformedTo);
             else if (result instanceof ParameterTransformingResult.Skipped)
